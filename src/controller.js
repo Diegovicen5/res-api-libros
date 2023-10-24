@@ -28,7 +28,6 @@ class LibroController{
 
 export const libro = new LibroController();
 */
-
 import {pool} from "./database.js";
 
 class librosController {
@@ -52,13 +51,13 @@ class librosController {
             res.json(result[0]);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: 'id inexistente.' });
+            res.status(404).json({ error: 'id inexistente.' });
         }
     }
     async add(req, res){
         try {
             const libro = req.body;
-            const [result] = await pool.query(`INSERT INTO libros(nombre, autor, categoria, año-publicacion, isbn) VALUES (?, ?, ?, ?, ?)`,[libro.nombre, libro.autor, libro.categoria, libro.año-publicacion, libro.isbn]);
+            const [result] = await pool.query(`INSERT INTO libros(nombre, autor, categoria, anio_publicacion, isbn) VALUES (?, ?, ?, ?, ?)`,[libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn]);
             res.json({"Id insertado": result.insertId});
         } catch (error) {
             console.error(error);
@@ -90,7 +89,7 @@ class librosController {
     async update(req, res){
         try {
             const libro = req.body;
-            const [result] = await pool.query(`UPDATE libros SET nombre=(?), autor=(?), categoria=(?), año-publicacion=(?), isbn=(?) WHERE id=(?)`,[libro.nombre, libro.autor, libro.categoria, libro.año-publicacion, libro.isbn, libro.id]);
+            const [result] = await pool.query(`UPDATE libros SET nombre=(?), autor=(?), categoria=(?), anio_publicacion=(?), isbn=(?) WHERE id=(?)`,[libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn, libro.id]);
             if (result.changedRows === 0) {
                 throw new Error('No se encontró un libro con el ID proporcionado o los datos proporcionados ya existen.');
             }
