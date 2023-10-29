@@ -32,7 +32,7 @@ class librosController {
             res.json({"Id insertado": result.insertId});
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: 'Hubo un error al agregar el libro, compruebe los campos requeridos' });
+            res.status(500).json({ error: 'Hubo un error al cargar el libro, compruebe los campos requeridos' });
         }
     }
     
